@@ -84,3 +84,16 @@ class BinarySearchTree:
             result.append(node.product)
             self._inorder_recursive(node.right, result)
 
+    
+    # Preorder Traversal
+    def preorder_traversal(self):
+        result = []
+        self._preorder_recursive(self.root, result)
+        return result
+
+    def _preorder_recursive(self, node, result):
+        if node:
+            result.append(node.product)
+            self._preorder_recursive(node.left, result)
+            self._preorder_recursive(node.right, result)
+
