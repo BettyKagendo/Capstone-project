@@ -25,4 +25,12 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f"Product: {self.name}, Price: {self.price}, Quantity:{self.quantity}"                                                       
+        return f"Product: {self.name}, Price: {self.price}, Quantity:{self.quantity}"   
+
+
+#define the node class
+class Node:
+    def __init__(self, product):
+        self.product = product
+        self.left = None
+        self.right = None                                                    
