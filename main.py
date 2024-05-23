@@ -38,4 +38,25 @@ class Node:
 #define BinarySearchTree
 class BinarySearchTree:
     def __init__(self):
-        self.root = None                                                
+        self.root = None
+    
+     #insert method
+    def insert(self, product):
+        if self.root is None:
+            self.root = Node(product)
+        else:
+            self._insert_recursive (product, self.root)
+
+    def _insert_recursive(self, product, node):
+            if product.product_id < node.product.product_id:
+                if node.left is None:
+                    node.left = Node(product)
+                else:
+                    self._insert_recursive(product, node.left)
+            elif product.product_id > node.product.product_id:
+                if node.right is None:
+                    node.right = Node(product)
+                else:
+                    self._insert_recursive(product, node.right)
+
+
