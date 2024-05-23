@@ -33,4 +33,9 @@ class Node:
     def __init__(self, product):
         self.product = product
         self.left = None
-        self.right = None                                                    
+        self.right = None    
+
+#define BinarySearchTree
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None                                                
