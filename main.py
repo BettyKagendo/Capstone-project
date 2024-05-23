@@ -11,8 +11,7 @@ try:
     )
     print ('Connected to the  database')
 except psycopg2.Error as err:
-    print ("Unable to connect to the database: ", err)  
-
+    print ("Unable to connect to the database: ", err) 
 
 
 
@@ -25,7 +24,7 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f"Product: {self.name}, Price: {self.price}, Quantity:{self.quantity}"   
+        return f"Product: {self.product_name}, Price: {self.price}, Quantity:{self.quantity}"   
 
 
 #define the node class
@@ -45,19 +44,19 @@ class BinarySearchTree:
         if self.root is None:
             self.root = Node(product)
         else:
-            self._insert_recursive (product, self.root)
+            self._insert_recursive (self.root, product)
 
-    def _insert_recursive(self, product, node):
+    def _insert_recursive(self, node, product):
             if product.product_id < node.product.product_id:
                 if node.left is None:
                     node.left = Node(product)
                 else:
-                    self._insert_recursive(product, node.left)
+                    self._insert_recursive( node.left, product)
             elif product.product_id > node.product.product_id:
                 if node.right is None:
                     node.right = Node(product)
                 else:
-                    self._insert_recursive(product, node.right)
+                    self._insert_recursive(node.right, product)
      #search method
     def search(self, product_id):
         return self._search(product_id, self.root)
@@ -109,3 +108,22 @@ class BinarySearchTree:
             self._postorder_recursive(node.right, result)
             result.append(node.product)
 
+
+# Function to fetch data from the database and insert into the binary search tree
+def populate_bst(bst):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM fruitproducts")
+    rows = cur.fetchall()
+
+    for row in rows:
+        product_id, product_name, price, quantity = row
+        product = Product(product_id, product_name, price, quantity)
+        bst.insert(product)
+
+    cur.close()
+    return bst 
+
+bst = BinarySearchTree() #create an instance of BinarySearchTree
+data = populate_bst(bst)
+print(data)
+print(bst.search(1))
