@@ -71,4 +71,16 @@ class BinarySearchTree:
             return self._search(product_id, node.left)
         else:
             return self._search(product_id, node.right)
+        
+    # Inorder Traversal
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.product)
+            self._inorder_recursive(node.right, result)
 
