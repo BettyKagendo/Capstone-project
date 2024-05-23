@@ -58,5 +58,17 @@ class BinarySearchTree:
                     node.right = Node(product)
                 else:
                     self._insert_recursive(product, node.right)
+     #search method
+    def search(self, product_id):
+        return self._search(product_id, self.root)
 
+    def _search(self, product_id, node):
+        if node is None:
+            return None
+        elif node.product.product_id == product_id:
+            return node.product
+        elif product_id < node.product.product_id:
+            return self._search(product_id, node.left)
+        else:
+            return self._search(product_id, node.right)
 
