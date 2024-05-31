@@ -109,17 +109,7 @@ class BinarySearchTree:
          current = current.right
         return current
         
-    # Inorder Traversal
-    def inorder_traversal(self):
-        result = []
-        self._inorder_recursive(self.root, result)
-        return result
-
-    def _inorder_recursive(self, node, result):
-        if node:
-            self._inorder_recursive(node.left, result)
-            result.append(node.product)
-            self._inorder_recursive(node.right, result)
+    
 
     
     # Preorder Traversal
@@ -134,6 +124,18 @@ class BinarySearchTree:
             self._preorder_recursive(node.left, result)
             self._preorder_recursive(node.right, result)
 
+# Inorder Traversal
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.product)
+            self._inorder_recursive(node.right, result)
+            
 # Postorder Traversal
     def postorder_traversal(self):
         result = []
@@ -155,21 +157,32 @@ def populate_bst(bst):
 
     # Print each row in a separate line
     for row in rows:
-        print (row)
-
+        #print (row)  # This line prints each row fetched from the database
         product_id, product_name, price, quantity = row
-        print(f"Product ID: {product_id}, Name: '{product_name}', Price: {float(price):.2f}, Quantity: {quantity}")
         product = Product(product_id, product_name, float(price), quantity)
         bst.insert(product)
-
+        #print(f"Inserted: {product}") 
     cur.close()
-    #return bst 
+    return bst 
 
 bst = BinarySearchTree() #create an instance of BinarySearchTree
-data = populate_bst(bst)
-#print(data)
 
-print(bst.search(20))
+# check the populate_bst function
+populate_bst(bst)
+#print(bst)
 
-# for product in bst.inorder_traversal():
-#     print(product.product_name, product.price, product.quantity)
+ #check search method
+#print(bst.search(2))
+
+#check delete method
+#bst.delete(16)
+
+
+#for product in bst.inorder_traversal():
+    #print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+
+for product in bst.preorder_traversal():
+    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+
+# for product in bst.postorder_traversal():
+#     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
