@@ -178,11 +178,11 @@ populate_bst(bst)
 #bst.delete(16)
 
 
-for product in bst.inorder_traversal():
-    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+# # for product in bst.inorder_traversal():
+# #     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
 
-for product in bst.preorder_traversal():
-    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
-
-# for product in bst.postorder_traversal():
+# for product in bst.preorder_traversal():
 #     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+
+for product in bst.postorder_traversal():
+    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
