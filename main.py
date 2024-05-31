@@ -28,7 +28,7 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f"Product: {self.product_name}, Price: {self.price}, Quantity:{self.quantity}"   
+        return f" Product ID: {self.product_id}, Name: {self.product_name}, Price: ${self.price}, Quantity:{self.quantity}"   
 
 
 #define the node class
@@ -152,11 +152,14 @@ def populate_bst(bst):
     cur = conn.cursor()
     cur.execute("SELECT * FROM fruitproducts")
     rows = cur.fetchall()
-    print (rows)
+
+    # Print each row in a separate line
+    for row in rows:
+        print (row)
 
     for row in rows:
         product_id, product_name, price, quantity = row
-        product = Product(product_id, product_name, price, quantity)
+        product = Product(f"Product ID: {product_id}, Name: {product_name}, Price: {price}, Quantity: {quantity})
         bst.insert(product)
 
     cur.close()
@@ -166,7 +169,7 @@ bst = BinarySearchTree() #create an instance of BinarySearchTree
 data = populate_bst(bst)
 #print(data)
 
-# print(bst.search(20))
+print(bst.search(20))
 
 # for product in bst.inorder_traversal():
 #     print(product.product_name, product.price, product.quantity)
