@@ -61,6 +61,8 @@ class BinarySearchTree:
                     node.right = Node(product)
                 else:
                     self._insert_recursive(node.right, product)
+            else:
+                return #if the product_id already exists, do nothing
      #search method
     def search(self, product_id):
         return self._search(product_id, self.root)
@@ -110,8 +112,6 @@ class BinarySearchTree:
         return current
         
     
-
-    
     # Preorder Traversal
     def preorder_traversal(self):
         result = []
@@ -135,7 +135,7 @@ class BinarySearchTree:
             self._inorder_recursive(node.left, result)
             result.append(node.product)
             self._inorder_recursive(node.right, result)
-            
+
 # Postorder Traversal
     def postorder_traversal(self):
         result = []
@@ -178,8 +178,8 @@ populate_bst(bst)
 #bst.delete(16)
 
 
-#for product in bst.inorder_traversal():
-    #print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+for product in bst.inorder_traversal():
+    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
 
 for product in bst.preorder_traversal():
     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
