@@ -1,13 +1,17 @@
 import psycopg2
-from decouple import config
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 #establish a connection
 try:
     conn = psycopg2.connect(
-       dbname=config('database'),
-       user='postgres',
-       password=config('password'),
-       host='localhost'
+       dbname = os.getenv('database'),
+       user = os.getenv('username'),
+       password = os.getenv('password'),
+       host = os.getenv('hostname')
     )
     print ('Connected to the  database')
 except psycopg2.Error as err:
@@ -70,6 +74,34 @@ class BinarySearchTree:
             return self._search(product_id, node.left)
         else:
             return self._search(product_id, node.right)
+    
+     # Delete method
+    def delete(self, product_id):
+        self.root = self._delete_recursive(product_id, self.root)
+
+    def _delete_recursive(self, product_id, node):
+        if node is None:
+            return None
+
+        if product_id < node.product.product_id:
+            node.left = self._delete_recursive(product_id, node.left)
+        elif product_id > node.product.product_id:
+            node.right = self._delete_recursive(product_id, node.right)
+        else:
+            if node.left is None:
+                temp = node.right #create a temporary ref to the right of the node to delete
+                node = None #remove the node to delete
+                return temp  
+            elif node.right is None:
+                temp = node.left
+                node = None
+                return temp
+            #when node to be deleted has both a left and right child
+            temp = self._max_value_node(node.right)
+            node.product = temp.product
+            node.right = self._delete_recursive(temp.product.product_id, node.right) #to delete the node we promoted to avoid duplication
+
+        return node
         
     # Inorder Traversal
     def inorder_traversal(self):
@@ -114,6 +146,7 @@ def populate_bst(bst):
     cur = conn.cursor()
     cur.execute("SELECT * FROM fruitproducts")
     rows = cur.fetchall()
+    print (rows)
 
     for row in rows:
         product_id, product_name, price, quantity = row
@@ -125,5 +158,9 @@ def populate_bst(bst):
 
 bst = BinarySearchTree() #create an instance of BinarySearchTree
 data = populate_bst(bst)
-print(data)
-print(bst.search(1))
+#print(data)
+
+# print(bst.search(20))
+
+# for product in bst.inorder_traversal():
+#     print(product.product_name, product.price, product.quantity)
