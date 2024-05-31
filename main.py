@@ -28,7 +28,7 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f" Product ID: {self.product_id}, Name: {self.product_name}, Price: ${self.price}, Quantity:{self.quantity}"   
+        return f" Product ID: {self.product_id}, Name: {self.product_name}, Price: ${self.price:.2f}, Quantity:{self.quantity}"   
 
 
 #define the node class
@@ -157,13 +157,13 @@ def populate_bst(bst):
     for row in rows:
         print (row)
 
-    for row in rows:
         product_id, product_name, price, quantity = row
-        product = Product(f"Product ID: {product_id}, Name: {product_name}, Price: {price}, Quantity: {quantity})
+        print(f"Product ID: {product_id}, Name: '{product_name}', Price: {float(price):.2f}, Quantity: {quantity}")
+        product = Product(product_id, product_name, float(price), quantity)
         bst.insert(product)
 
     cur.close()
-    return bst 
+    #return bst 
 
 bst = BinarySearchTree() #create an instance of BinarySearchTree
 data = populate_bst(bst)
