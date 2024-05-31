@@ -102,6 +102,12 @@ class BinarySearchTree:
             node.right = self._delete_recursive(temp.product.product_id, node.right) #to delete the node we promoted to avoid duplication
 
         return node
+    
+    def _max_value_node(self, node):
+        current = node
+        while current.right is not None:
+         current = current.right
+        return current
         
     # Inorder Traversal
     def inorder_traversal(self):
