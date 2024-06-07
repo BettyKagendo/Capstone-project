@@ -165,10 +165,10 @@ def populate_bst(bst):
     cur.close()
     return bst 
 
-bst = BinarySearchTree() #create an instance of BinarySearchTree
+#bst = BinarySearchTree() #create an instance of BinarySearchTree
 
 # check the populate_bst function
-populate_bst(bst)
+#populate_bst(bst)
 #print(bst)
 
  #check search method
@@ -189,7 +189,6 @@ populate_bst(bst)
     #print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
 
 
-
 # Function to display the user menu
 def display_menu():
     print("===== Product Management System =====")
@@ -200,3 +199,13 @@ def display_menu():
     print("5. Display products (Preorder Traversal)")
     print("6. Display products (Postorder Traversal)")
     print("0. Exit")
+
+    # Function to get user input for a new product
+def get_product_input():
+    product_id = int(input("Enter the product ID: "))
+    product_name = input("Enter the product name: ")
+    price = float(input("Enter the price: "))
+    quantity = int(input("Enter the quantity: "))
+    return Product(product_id, product_name, price, quantity)
+
+
