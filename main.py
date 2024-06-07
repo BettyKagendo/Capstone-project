@@ -209,3 +209,47 @@ def get_product_input():
     return Product(product_id, product_name, price, quantity)
 
 
+# Main program
+bst = BinarySearchTree()  # create an instance of BinarySearchTree
+populate_bst(bst)  # populate the BST with data from the database
+
+while True:
+    display_menu()
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        product = get_product_input()
+        bst.insert(product)
+        print("Product inserted successfully.")
+    elif choice == "2":
+        product_id = int(input("Enter the product ID to search: "))
+        product = bst.search(product_id)
+        if product:
+            print("Product found:")
+            print(product)
+        else:
+            print("Product not found.")
+
+    elif choice == "3":
+        product_id = int(input("Enter the product ID to delete: "))
+        bst.delete(product_id)
+        print("Product deleted successfully.")
+    elif choice == "4":
+        print("Products (Inorder Traversal):")
+        for product in bst.inorder_traversal():
+            print(product)
+    elif choice == "5":
+        print("Products (Preorder Traversal):")
+        for product in bst.preorder_traversal():
+            print(product)
+    elif choice == "6":
+        print("Products (Postorder Traversal):")
+        for product in bst.postorder_traversal():
+            print(product)
+    elif choice == "0":
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+    print()  # Print an empty line for readability
