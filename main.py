@@ -172,17 +172,31 @@ populate_bst(bst)
 #print(bst)
 
  #check search method
-#print(bst.search(2))
+# print(bst.search(2))
 
 #check delete method
-#bst.delete(16)
+# bst.delete(2)
 
+# print(bst.search(2))
 
-# # for product in bst.inorder_traversal():
-# #     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+# for product in bst.inorder_traversal():
+#     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
 
 # for product in bst.preorder_traversal():
 #     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
 
-for product in bst.postorder_traversal():
-    print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+#for product in bst.postorder_traversal():
+    #print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
+
+
+
+# Function to display the user menu
+def display_menu():
+    print("===== Product Management System =====")
+    print("1. Insert a new product")
+    print("2. Search for a product")
+    print("3. Delete a product")
+    print("4. Display products (Inorder Traversal)")
+    print("5. Display products (Preorder Traversal)")
+    print("6. Display products (Postorder Traversal)")
+    print("0. Exit")
