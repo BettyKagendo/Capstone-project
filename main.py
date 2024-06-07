@@ -165,29 +165,6 @@ def populate_bst(bst):
     cur.close()
     return bst 
 
-#bst = BinarySearchTree() #create an instance of BinarySearchTree
-
-# check the populate_bst function
-#populate_bst(bst)
-#print(bst)
-
- #check search method
-# print(bst.search(2))
-
-#check delete method
-# bst.delete(2)
-
-# print(bst.search(2))
-
-# for product in bst.inorder_traversal():
-#     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
-
-# for product in bst.preorder_traversal():
-#     print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
-
-#for product in bst.postorder_traversal():
-    #print(f"Product ID: {product.product_id} Name: {product.product_name} Price: {product.price} Quantity: {product.quantity}")
-
 
 # Function to display the user menu
 def display_menu():
@@ -221,6 +198,7 @@ while True:
         product = get_product_input()
         bst.insert(product)
         print("Product inserted successfully.")
+
     elif choice == "2":
         product_id = int(input("Enter the product ID to search: "))
         product = bst.search(product_id)
@@ -234,22 +212,27 @@ while True:
         product_id = int(input("Enter the product ID to delete: "))
         bst.delete(product_id)
         print("Product deleted successfully.")
+
     elif choice == "4":
         print("Products (Inorder Traversal):")
         for product in bst.inorder_traversal():
             print(product)
+
     elif choice == "5":
         print("Products (Preorder Traversal):")
         for product in bst.preorder_traversal():
             print(product)
+
     elif choice == "6":
         print("Products (Postorder Traversal):")
         for product in bst.postorder_traversal():
             print(product)
+
     elif choice == "0":
         print("Exiting the program.")
         break
     else:
         print("Invalid choice. Please try again.")
+        
 
-    print()  # Print an empty line for readability
+    
