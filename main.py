@@ -155,9 +155,17 @@ class BinarySearchTree:
         cur = conn.cursor()
         query = "INSERT INTO fruitproducts (product_id, product_name, price, quantity) VALUES (%s, %s, %s, %s)"
         values = (product.product_id, product.product_name, product.price, product.quantity)
-        cur.execute(query, values)
-        conn.commit()
-        cur.close()
+        try:
+            cur.execute(query, values)
+            conn.commit()
+        except psycopg2.errors.UniqueViolation:
+            #if the product already exists, do nothing
+            conn.rollback()  #undo any changes made during the current database transaction
+        except Exception as e: 
+            print(f'Error: {e}')
+            conn.rollback()
+        finally: #to ensure that the cursor is always closed
+            cur.close()
 
 
 # Function to fetch data from the database and insert into the binary search tree
