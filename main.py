@@ -166,6 +166,20 @@ class BinarySearchTree:
             conn.rollback()
         finally: #to ensure that the cursor is always closed
             cur.close()
+            
+# Delete a product from the database
+def _delete_from_database(self, product):
+    cur = conn.cursor()
+    query = "DELETE FROM fruitproducts WHERE product_id = %s"
+    try:
+        cur.execute(query, (product.product_id,))
+        conn.commit()
+    except Exception as e:
+        # Handle any exceptions
+        print(f"Error: {e}")
+        conn.rollback()  # Roll back the transaction
+    finally:
+        cur.close()
 
 
 # Function to fetch data from the database and insert into the binary search tree
