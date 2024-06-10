@@ -94,10 +94,12 @@ class BinarySearchTree:
         else:
             if node.left is None:
                 temp = node.right #create a temporary ref to the right of the node to delete
+                self._delete_from_database(node.product)  # Delete the product from the database
                 node = None #remove the node to delete
                 return temp  
             elif node.right is None:
                 temp = node.left
+                self._delete_from_database(node.product)  # Delete the product from the database
                 node = None
                 return temp
             #when node to be deleted has both a left and right child
@@ -166,7 +168,7 @@ class BinarySearchTree:
             conn.rollback()
         finally: #to ensure that the cursor is always closed
             cur.close()
-            
+
 # Delete a product from the database
 def _delete_from_database(self, product):
     cur = conn.cursor()
