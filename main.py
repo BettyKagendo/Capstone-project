@@ -148,6 +148,15 @@ class BinarySearchTree:
             self._postorder_recursive(node.right, result)
             result.append(node.product)
 
+# Insert a product into the database
+    def _insert_into_database(self, product):
+        cur = conn.cursor()
+        query = "INSERT INTO fruitproducts (product_id, product_name, price, quantity) VALUES (%s, %s, %s, %s)"
+        values = (product.product_id, product.product_name, product.price, product.quantity)
+        cur.execute(query, values)
+        conn.commit()
+        cur.close()
+
 
 # Function to fetch data from the database and insert into the binary search tree
 def populate_bst(bst):
