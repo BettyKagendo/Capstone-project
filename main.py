@@ -54,11 +54,13 @@ class BinarySearchTree:
             if product.product_id < node.product.product_id:
                 if node.left is None:
                     node.left = Node(product)
+                    self._insert_into_database(product)  # Insert the product into the database
                 else:
                     self._insert_recursive( node.left, product)
             elif product.product_id > node.product.product_id:
                 if node.right is None:
                     node.right = Node(product)
+                    self._insert_into_database(product)  # Insert the product into the database
                 else:
                     self._insert_recursive(node.right, product)
             else:
