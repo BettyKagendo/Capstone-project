@@ -92,18 +92,18 @@ class BinarySearchTree:
         elif product_id > node.product.product_id:
             node.right = self._delete_recursive(product_id, node.right)
         else:
-            if node.left is None:
+            if node.left is None: #Node has no left child
                 temp = node.right #create a temporary ref to the right of the node to delete
                 self._delete_from_database(node.product)  # Delete the product from the database
                 node = None #remove the node to delete
-                return temp  
+                return temp  #points to the right child (if it exists) 
             elif node.right is None:
                 temp = node.left
                 self._delete_from_database(node.product)  # Delete the product from the database
                 node = None
                 return temp
             #when node to be deleted has both a left and right child
-            temp = self._max_value_node(node.right)
+            temp = self._max_value_node(node.right) #finding the replacement node
             node.product = temp.product
             node.right = self._delete_recursive(temp.product.product_id, node.right) #to delete the node we promoted to avoid duplication
 
@@ -170,18 +170,18 @@ class BinarySearchTree:
             cur.close()
 
 # Delete a product from the database
-def _delete_from_database(self, product):
-    cur = conn.cursor()
-    query = "DELETE FROM fruitproducts WHERE product_id = %s"
-    try:
-        cur.execute(query, (product.product_id,))
-        conn.commit()
-    except Exception as e:
-        # Handle any exceptions
-        print(f"Error: {e}")
-        conn.rollback()  # Roll back the transaction
-    finally:
-        cur.close()
+    def _delete_from_database(self, product):
+        cur = conn.cursor()
+        query = "DELETE FROM fruitproducts WHERE product_id = %s"
+        try:
+            cur.execute(query, (product.product_id,))
+            conn.commit()
+        except Exception as e:
+            # Handle any exceptions
+            print(f"Error: {e}")
+            conn.rollback()  # Roll back the transaction
+        finally:
+            cur.close()
 
 
 # Function to fetch data from the database and insert into the binary search tree
